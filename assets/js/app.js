@@ -6,7 +6,7 @@ var gettingLocation = false;
 jQuery(document).ready(function($){
     var location = getLocation('location');
     if(location){
-        location = location.replace('+', ' ');
+        location = location.replace('+', ' ').toLowerCase();
     }
 
     var locations = Cookies.get('locations');
@@ -147,6 +147,7 @@ function getInfo(location){
 function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDesc){
     var url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+key;
     var request = $.get(url);
+    location = location.toLowerCase();
 
     // Successful location request
     request.done(function(data){
@@ -161,7 +162,7 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
                 locations.push(cookie);
             }
         }
-        if(!gettingCurrent && !locations.includes(location) && location.toLowerCase() != 'current location'){
+        if(!gettingCurrent && !locations.includes(location) && location != 'current location'){
             locations.push(location);
             $('.location-select').append('<div class="location-box" role="button">'+location+'</div>');
             $('.location-select>.location-box').off();
