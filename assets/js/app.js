@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
     }
 
     // If we are entering the page with a query from the home page
-    if(location != '' && location != undefined && location.toLowerCase() != 'current+location'){
+    if(location != '' && location != undefined && location.toLowerCase() != 'current location'){
         getInfo(location);
     }
     // If we are entering the page with no query and no default location, use geolocation
@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
 
     $('#submit-button').click(function(){
         var location = $('#search').val();
-        if(location == ''){
+        if(location == '' || location.toLowerCase() == 'current location'){
             $('.form-overlay .error').html('Invalid input');
         }else{
             $('.loading').css('display', 'block');
@@ -50,6 +50,18 @@ jQuery(document).ready(function($){
 
     $('#cancel-button').click(function(){
         $('.form-overlay').css('display', 'none');
+    });
+
+    $('.location-select>.location-box').on('click', function(){
+        if(!$(this).hasClass('current')){
+            $('.loading').css('display', 'block');
+            $('.form-overlay').css('display', 'none');
+            getInfo($(this).html());
+        }else{
+            $('.loading').css('display', 'block');
+            $('.form-overlay').css('display', 'none');
+            getCurrentLocation();
+        }
     });
 });
 
@@ -85,7 +97,6 @@ function geoSuccess(pos){
     var request = $.get('https://api.openweathermap.org/data/2.5/weather?lat='+pos.coords.latitude+'&lon='+pos.coords.longitude+key);
 
     request.done(function(data){
-        console.log(data);
         getInfoLatLon(pos.coords.latitude, pos.coords.longitude, data.name, data.main.temp, data.main.feels_like, data.weather[0].description);
     });
 
@@ -140,7 +151,6 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
     // Successful location request
     request.done(function(data){
         var tomorrow = data.daily[1];
-        console.log(tomorrow);
 
         var locations = [];
         var cookie = Cookies.get('locations');
@@ -154,6 +164,18 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
         if(!gettingCurrent && !locations.includes(location) && location.toLowerCase() != 'current location'){
             locations.push(location);
             $('.location-select').append('<div class="location-box" role="button">'+location+'</div>');
+            $('.location-select>.location-box').off();
+            $('.location-select>.location-box').on('click', function(){
+                if(!$(this).hasClass('current')){
+                    $('.loading').css('display', 'block');
+                    $('.form-overlay').css('display', 'none');
+                    getInfo($(this).html());
+                }else{
+                    $('.loading').css('display', 'block');
+                    $('.form-overlay').css('display', 'none');
+                    getCurrentLocation();
+                }
+            });
             Cookies.set('locations', locations.join('|'), { path: '/' });
         }
 
