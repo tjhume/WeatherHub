@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html class="app-content" lang="en">
     <head>
         <meta charset="utf-8">
 
@@ -13,20 +13,60 @@
     </head>
 
     <body>
+        <div class="loading">
+            <div class="table">
+                <div class="cell-center text-center">
+                    <img src="../assets/img/loader.gif" alt="Loading...">
+                </div>
+            </div>
+        </div>
+        <div class="form-overlay">
+            <div class="table">
+                <div class="cell-center text-center">
+                    <input id="search" type="text" placeholder="Enter location">
+                    <div id="submit-button" role=button>Submit</div>
+                    <div class="error"></div>
+                </div>
+            </div>
+        </div>
         <header>
-            <h1>WeatherHub</h1>
+            <div class="current-location text-center">
+                <div class="current-location-box">
+                    Location: Loading...
+                </div>
+            </div>
+            <div class="location-select text-center">
+                <div class="add-location">
+                    <div class="table">
+                        <div class="cell-center">
+                            <div class="location-box" role="button">+</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-box" role="button">Current Location</div>
+            </div>
         </header>
         
-        <div class="home-content text-center">
-            <h1>Welcome</h1>
-            <form>
-                <input id="search" class="text-center" type="text" placeholder="Current Location">
-                <br>
-                <input id="submit" class="text-center" type="submit" value="Check Weather">
-            </form>
+        <div class="app-display text-center">
+            <div class="left text-center">
+                <h1>TODAY:</h1>
+                <div class="top">
+                    <span class="condition"></span>
+                    <span class="feels"></span>
+                    <div class="spacer"></div>
+                    <span class="tomorrow"></span>
+                </div>
+                <h1>WHAT TO WEAR</h1>
+                <div>A pic will go here</div>
+            </div>
+            <div class="right text-center">
+                Right content
+            </div>
+            <div class="clear"></div>
         </div>
 
         <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/cookie.min.js"></script>
         <script src="../assets/js/app.js"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html class="home-content" lang="en">
     <head>
         <meta charset="utf-8">
 
@@ -17,17 +17,14 @@
             <h1>WeatherHub</h1>
         </header>
         
-        <div class="home-content text-center">
+        <div class="text-center">
             <h1>Welcome</h1>
-            <form action="app/index.html" method="GET">
+            <form id="home-form" action="app/index.html" method="GET">
                 <input id="search" name="location" class="text-center" type="text" placeholder="Current Location">
                 <br>
-                <input id="submit" class="text-center" type="submit" value="Check Weather">
+                <input id="submit-button" class="text-center" type="submit" value="Check Weather">
             </form>
             <div id="result"></div>
         </div>
-
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/home.js"></script>
     </body>
 </html>

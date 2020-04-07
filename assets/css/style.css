@@ -9,6 +9,7 @@ html{
     min-height: 100%;
     height: 100%;
     width: 100%;
+    position: relative;
 }
 body{
     display: table-cell;
@@ -32,18 +33,32 @@ input{
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+.table{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.cell-center{
+    display: table-cell;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+}
+.clear{
+    clear: both;
+}
+.spacer{
+    margin-bottom: 10px;
+}
 
-/* Header */
+/* Home */
 
-header{
+.home-content header{
     height: 80px;
     position: absolute;
     top: 50px;
     left: 100px;
 }
-
-/* Home */
-
 .home-content h1{
     margin-bottom: 10px;
 }
@@ -54,9 +69,129 @@ header{
     max-width: 90%;
     margin-bottom: 10px;
 }
-.home-content #submit{
+.home-content #submit-button{
     width: 200px;
     height: 50px;
     max-width: 90%;
     font-size: 26px;
+}
+
+/* App */
+.app-content header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+.app-content .current-location{
+    background-color: rgb(266, 266, 266);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 80px;
+}
+.app-content .current-location-box{
+    background-color: white;
+    border: 1px solid rgb(77, 78, 78);
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.app-content{
+    padding-top: 80px;
+}
+.app-content .location-select{
+    background-color: rgb(170, 170, 170);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    position: relative;
+    padding-right: 80px;
+    padding-left: 80px;
+}
+.app-content .location-box{
+    display: inline-block;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    border: 1px solid rgb(77, 78, 78);
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.app-content .add-location{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 80px;
+    padding-right: 30px;
+}
+.app-content .add-location .location-box{
+    padding: 0px;
+    margin: 0px;
+    width: 50px;
+    font-weight: bold;
+}
+.app-content .loading,
+.app-content .form-overlay{
+    position: fixed;
+    background-color: rgb(242, 242, 242);
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+.app-content .form-overlay{
+    display: none;
+}
+.app-content .form-overlay .error{
+    margin-top: 10px;
+    color: red;
+    font-size: 18px;
+}
+.app-content #search{
+    height: 50px;
+    font-size: 26px;
+    width: 500px;
+    max-width: 90%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+.app-content #submit-button{
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    max-width: 90%;
+    font-size: 26px;
+    background-color: rgb(77, 78, 78);
+    color: white;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.app-display .left{
+    float: left;
+    width: 40%;
+    padding-left: 20px;
+    padding-right: 15px;
+}
+.app-display .right{
+    float: left;
+    width: 60%;
+    padding-left: 15px;
+    padding-right: 20px;
+}
+.app-display span{
+    font-size: 28px;
+    display: inline-block;
+    text-transform: capitalize;
+}
+.app-display .condition{
+    margin-right: 20px;
+}
+.app-display .left .top{
+    margin-bottom: 30px;
 }
