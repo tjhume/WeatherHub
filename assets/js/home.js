@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-    $('.home-content #submit').click(function(e){
+    /*$('#submit').click(function(e){
         e.preventDefault();
         var location = $('.home-content #search').val();
         var base = 'https://api.openweathermap.org/data/2.5/weather?q=';
@@ -8,6 +8,14 @@ jQuery(document).ready(function($){
         $.get(url, function(data){
             $('#result').html(JSON.stringify(data));
             console.log(data);
+            var lon = data.coord.lon;
+            var lat = data.coord.lat;
+            var url2 = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+key;
+            $.get(url2, function(data2){
+                var tomorrow = data2.daily[1];
+                console.log(tomorrow);
+            });
         });     
-    })
+    });*/
 });
+
