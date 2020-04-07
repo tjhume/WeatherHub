@@ -161,7 +161,8 @@ input{
     margin-bottom: 10px;
     padding-left: 10px;
 }
-.app-content #submit-button{
+.app-content #submit-button,
+.app-content #cancel-button{
     width: 200px;
     height: 50px;
     line-height: 50px;
@@ -169,8 +170,10 @@ input{
     font-size: 26px;
     background-color: rgb(77, 78, 78);
     color: white;
-    margin: 0 auto;
     cursor: pointer;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .app-display .left{
     float: left;

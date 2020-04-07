@@ -1,14 +1,23 @@
 var gettingCurrent = false;
 var gettingLocation = false;
 
+//Cookies.remove('locations');
+
 jQuery(document).ready(function($){
     var location = getLocation('location');
+    if(location){
+        location = location.replace('+', ' ');
+    }
 
     var locations = Cookies.get('locations');
     if(locations){
-        locations = locations.split(',');
-        for(var i = 0; i < locations.length; i++){
-            $('.location-select').append('<div class="location-box" role="button">'+location+'</div>');
+        if(locations.includes('|')){
+            locations = locations.split('|');
+            for(var i = 0; i < locations.length; i++){
+                $('.location-select').append('<div class="location-box" role="button">'+locations[i]+'</div>');
+            }
+        }else{
+            $('.location-select').append('<div class="location-box" role="button">'+locations+'</div>');
         }
     }
 
@@ -37,7 +46,11 @@ jQuery(document).ready(function($){
             $('.form-overlay').css('display', 'none');
             getInfo(location);
         }
-    })
+    });
+
+    $('#cancel-button').click(function(){
+        $('.form-overlay').css('display', 'none');
+    });
 });
 
 
@@ -130,14 +143,18 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
         console.log(tomorrow);
 
         var locations = [];
-        if(Cookies.get('locations')){
-            locations = Cookies.get('locations');
-            locations = locations.split(',');
+        var cookie = Cookies.get('locations');
+        if(cookie){
+            if(cookie.includes('|')){
+                locations = cookie.split('|');
+            }else{
+                locations.push(cookie);
+            }
         }
         if(!gettingCurrent && !locations.includes(location) && location.toLowerCase() != 'current location'){
             locations.push(location);
             $('.location-select').append('<div class="location-box" role="button">'+location+'</div>');
-            Cookies.set('locations', locations.toString(), { path: '/' });
+            Cookies.set('locations', locations.join('|'), { path: '/' });
         }
 
         $('.current-location-box').html('Location: ' + location);
