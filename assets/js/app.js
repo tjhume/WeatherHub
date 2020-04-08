@@ -94,6 +94,7 @@ jQuery(document).ready(function($){
 
         Cookies.set('locations', locations.join('|'), { path: '/' });
         $(this).closest('.box-wrap').remove();
+        $('.app-content').css('padding-top', $('header').height());
     });
 
     $(window).on('resize', function(){
@@ -220,6 +221,7 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
         if(!gettingCurrent && !locations.includes(location) && location != 'current location'){
             locations.push(location);
             $('.location-select').append('<div class="box-wrap"><div class="location-box" role="button">'+location+'</div><div class="close">x</div></div>');
+            $('.app-content').css('padding-top', $('header').height());
             $('.location-select .box-wrap .location-box').off();
             $('.location-select .box-wrap .location-box').on('click', function(){
                 if(!$(this).hasClass('current')){
@@ -258,6 +260,7 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
 
                 Cookies.set('locations', locations.join('|'), { path: '/' });
                 $(this).closest('.box-wrap').remove();
+                $('.app-content').css('padding-top', $('header').height());
             });
             Cookies.set('locations', locations.join('|'), { path: '/' });
         }
