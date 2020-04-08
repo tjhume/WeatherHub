@@ -203,16 +203,10 @@ input{
     margin-right: 10px;
 }
 .app-display .left{
-    float: left;
     width: 40%;
-    padding-left: 20px;
-    padding-right: 15px;
 }
 .app-display .right{
-    float: left;
     width: 60%;
-    padding-left: 15px;
-    padding-right: 20px;
 }
 .app-display span{
     font-size: 28px;
@@ -231,6 +225,66 @@ input{
 .app-display .jacket{
     width: 150px;
 }
+.app-display .raincoat{
+    width: 145px;
+}
 .app-display .short{
     width: 100px;
+}
+.app-display .condition-img{
+    border-radius: 50px;
+    max-width: 95%;
+}
+
+@media (max-width: 1400px){
+    h1{
+        font-size: 50px;
+    }
+    .app-display span{
+        font-size: 20px;
+    }
+    .app-display .condition{
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 900px){
+    h1{
+        font-size: 30px;
+    }
+    .app-display span{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px){
+    .app-display .left{
+        width: 60%;
+    }
+    .app-display .right{
+        width: 40%;
+    }
+    .app-display .condition{
+        margin-right: 4px;
+    }
+}
+
+@media (max-width: 480px){
+    h1{
+        font-size: 24px;
+    }
+    .app-display span{
+        font-size: 14px;
+    }
+    .app-display .condition{
+        margin-right: 0px;
+    }
+    .app-content .add-location{
+        padding-right: 10px;
+        width: 60px;
+    }
+    .app-content .location-select{
+        padding-right: 60px;
+        padding-left: 30px;
+    }
 }

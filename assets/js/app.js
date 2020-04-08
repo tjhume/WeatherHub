@@ -22,6 +22,10 @@ jQuery(document).ready(function($){
         }
     }
 
+    // Correct padding
+    $('.app-content').css('padding-top', $('header').height());
+
+
     // If we are entering the page with a query from the home page
     if(location != '' && location != undefined && location.toLowerCase() != 'current location'){
         getInfo(location);
@@ -91,6 +95,11 @@ jQuery(document).ready(function($){
         Cookies.set('locations', locations.join('|'), { path: '/' });
         $(this).closest('.box-wrap').remove();
     });
+
+    $(window).on('resize', function(){
+        $('.app-content').css('padding-top', $('header').height());
+    });
+
 });
 
 
@@ -263,15 +272,21 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
 
         // Clothes display
         $('.wear-top').removeClass('jacket');
+        $('.wear-top').removeClass('raincoat');
         $('.wear-bottom').removeClass('short');
+        var pants = false;
         // For top clothing first
         if(currentDesc.indexOf('thunderstorm') !== -1 ||
         currentDesc.indexOf('drizzle') !== -1 ||
-        currentDesc.indexOf('rain') !== -1){
+        (currentDesc.indexOf('rain') !== -1 && currentDesc.indexOf('snow') == -1)){
             $('.wear-top').attr('src', '../assets/img/raincoat.png');
+            $('.wear-top').addClass('raincoat');
+            pants = true;
         }
         else if(currentDesc.indexOf('snow') !== -1){
             $('.wear-top').attr('src', '../assets/img/jacket.png');
+            $('.wear-top').addClass('jacket');
+            pants = true;
         }
         else if(currentFeels >= 60){
             $('.wear-top').attr('src', '../assets/img/tshirt.png');
@@ -285,7 +300,10 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
         }
 
         // For bottom clothing
-        if(currentFeels >= 60){
+        if(pants){
+            $('.wear-bottom').attr('src', '../assets/img/pants.png');
+        }
+        else if(currentFeels >= 60){
             $('.wear-bottom').attr('src', '../assets/img/short.png');
             $('.wear-bottom').addClass('short');
         }else{
@@ -294,6 +312,27 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
 
 
         // Weather display
+        if(currentDesc.indexOf('thunderstorm') !== -1){
+            $('.condition-img').attr('src', '../assets/img/thunder.jpg');
+        }
+        else if(currentDesc.indexOf('drizzle') !== -1 ||
+        (currentDesc.indexOf('rain') !== -1 && currentDesc.indexOf('snow') == -1)){
+            $('.condition-img').attr('src', '../assets/img/rain.jpg');
+        }
+        else if(currentDesc.indexOf('snow') !== -1){
+            $('.condition-img').attr('src', '../assets/img/snow.jpg');
+        }
+        else if(currentDesc.indexOf('clear') !== -1){
+            $('.condition-img').attr('src', '../assets/img/clear-sky.jpg');
+        }
+        else if(currentDesc.indexOf('overcast') !== -1){
+            $('.condition-img').attr('src', '../assets/img/overcast.jpg');
+        }
+        else if(currentDesc.indexOf('cloud') !== -1){
+            $('.condition-img').attr('src', '../assets/img/cloud.jpg');
+        }else{
+            $('.condition-img').attr('src', '../assets/img/fog.jpg');
+        }
 
         gettingLocation = false;
         gettingCurrent = false;
