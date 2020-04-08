@@ -5,6 +5,7 @@ var gettingLocation = false;
 
 jQuery(document).ready(function($){
     var location = getLocation('location');
+    window.history.replaceState(null, null, window.location.pathname);
     if(location){
         location = location.replace('+', ' ').toLowerCase();
     }
