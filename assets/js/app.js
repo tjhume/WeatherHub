@@ -252,11 +252,48 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
             });
             Cookies.set('locations', locations.join('|'), { path: '/' });
         }
+        
+        currentTemp = KtoF(currentTemp);
+        currentFeels = KtoF(currentFeels);
 
         $('.current-location-box').html('Location: ' + location);
-        $('.condition').html(currentDesc + ', ' + KtoF(currentTemp) + '&deg;');
-        $('.feels').html('Feels like: ' + KtoF(currentFeels) + '&deg;');
+        $('.condition').html(currentDesc + ', ' + currentTemp + '&deg;');
+        $('.feels').html('Feels like: ' + currentFeels + '&deg;');
         $('.tomorrow').html('Tomorrow: ' + tomorrow.weather[0].description + ' ' + KtoF(tomorrow.temp.day) + '&deg;');
+
+        // Clothes display
+        $('.wear-top').removeClass('jacket');
+        $('.wear-bottom').removeClass('short');
+        // For top clothing first
+        if(currentDesc.indexOf('thunderstorm') !== -1 ||
+        currentDesc.indexOf('drizzle') !== -1 ||
+        currentDesc.indexOf('rain') !== -1){
+            $('.wear-top').attr('src', '../assets/img/raincoat.png');
+        }
+        else if(currentDesc.indexOf('snow') !== -1){
+            $('.wear-top').attr('src', '../assets/img/jacket.png');
+        }
+        else if(currentFeels >= 60){
+            $('.wear-top').attr('src', '../assets/img/tshirt.png');
+        }
+        else if(currentFeels >= 40){
+            $('.wear-top').attr('src', '../assets/img/hoodie.png');
+        }
+        else{
+            $('.wear-top').attr('src', '../assets/img/jacket.png');
+            $('.wear-top').addClass('jacket');
+        }
+
+        // For bottom clothing
+        if(currentFeels >= 60){
+            $('.wear-bottom').attr('src', '../assets/img/short.png');
+            $('.wear-bottom').addClass('short');
+        }else{
+            $('.wear-bottom').attr('src', '../assets/img/pants.png');
+        }
+
+
+        // Weather display
 
         gettingLocation = false;
         gettingCurrent = false;

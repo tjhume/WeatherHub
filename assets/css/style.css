@@ -225,3 +225,12 @@ input{
 .app-display .left .top{
     margin-bottom: 30px;
 }
+.app-display .to-wear{
+    margin-bottom: 15px;
+}
+.app-display .jacket{
+    width: 150px;
+}
+.app-display .short{
+    width: 100px;
+}
