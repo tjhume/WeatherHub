@@ -14,10 +14,10 @@ jQuery(document).ready(function($){
         if(locations.includes('|')){
             locations = locations.split('|');
             for(var i = 0; i < locations.length; i++){
-                $('.location-select').append('<div class="location-box" role="button">'+locations[i]+'</div>');
+                $('.location-select').append('<div class="box-wrap"><div class="location-box" role="button">'+locations[i]+'</div><div class="close">x</div></div>');
             }
         }else{
-            $('.location-select').append('<div class="location-box" role="button">'+locations+'</div>');
+            $('.location-select').append('<div class="box-wrap"><div class="location-box" role="button">'+locations+'</div><div class="close">x</div></div>');
         }
     }
 
@@ -52,7 +52,7 @@ jQuery(document).ready(function($){
         $('.form-overlay').css('display', 'none');
     });
 
-    $('.location-select>.location-box').on('click', function(){
+    $('.location-select .box-wrap .location-box').on('click', function(){
         if(!$(this).hasClass('current')){
             $('.loading').css('display', 'block');
             $('.form-overlay').css('display', 'none');
@@ -65,6 +65,30 @@ jQuery(document).ready(function($){
             $('.form-overlay').css('display', 'none');
             getCurrentLocation();
         }
+    });
+
+    $('.location-select .close').on('click', function(){
+        var location = $(this).siblings('.location-box').html();
+
+        var locations = [];
+        var cookie = Cookies.get('locations');
+        if(cookie){
+            if(cookie.includes('|')){
+                locations = cookie.split('|');
+            }else{
+                locations.push(cookie);
+            }
+        }
+
+        for(var i = 0; i < locations.length; i++){
+            if(location == locations[i]){
+                locations.splice(i, 1);
+                break;
+            }
+        }
+
+        Cookies.set('locations', locations.join('|'), { path: '/' });
+        $(this).closest('.box-wrap').remove();
     });
 });
 
@@ -185,9 +209,9 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
         }
         if(!gettingCurrent && !locations.includes(location) && location != 'current location'){
             locations.push(location);
-            $('.location-select').append('<div class="location-box" role="button">'+location+'</div>');
-            $('.location-select>.location-box').off();
-            $('.location-select>.location-box').on('click', function(){
+            $('.location-select').append('<div class="box-wrap"><div class="location-box" role="button">'+location+'</div><div class="close">x</div></div>');
+            $('.location-select .box-wrap .location-box').off();
+            $('.location-select .box-wrap .location-box').on('click', function(){
                 if(!$(this).hasClass('current')){
                     $('.loading').css('display', 'block');
                     $('.form-overlay').css('display', 'none');
@@ -200,6 +224,30 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
                     $('.form-overlay').css('display', 'none');
                     getCurrentLocation();
                 }
+            });
+            $('.location-select .close').off();
+            $('.location-select .close').on('click', function(){
+                var location = $(this).siblings('.location-box').html();
+
+                var locations = [];
+                var cookie = Cookies.get('locations');
+                if(cookie){
+                    if(cookie.includes('|')){
+                        locations = cookie.split('|');
+                    }else{
+                        locations.push(cookie);
+                    }
+                }
+                
+                for(var i = 0; i < locations.length; i++){
+                    if(location == locations[i]){
+                        locations.splice(i, 1);
+                        break;
+                    }
+                }
+
+                Cookies.set('locations', locations.join('|'), { path: '/' });
+                $(this).closest('.box-wrap').remove();
             });
             Cookies.set('locations', locations.join('|'), { path: '/' });
         }

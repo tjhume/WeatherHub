@@ -113,6 +113,12 @@ input{
     padding-right: 80px;
     padding-left: 80px;
 }
+.app-content .box-wrap{
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+    position: relative;
+}
 .app-content .location-box{
     display: inline-block;
     padding-left: 25px;
@@ -121,14 +127,27 @@ input{
     line-height: 40px;
     background-color: white;
     border: 1px solid rgb(77, 78, 78);
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-bottom: 10px;
     cursor: pointer;
     text-transform: capitalize;
+    margin-bottom: 10px;
 }
 .app-content .location-box span{
     text-transform: uppercase;
+}
+.app-content .box-wrap .close{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: white;
+    font-size: 12px;
+    background-color: rgb(77, 78, 78);
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    padding-bottom: 3px;
+    border-radius: 25px;
+    text-transform: none;
+    cursor: pointer;
 }
 .app-content .add-location{
     position: absolute;
