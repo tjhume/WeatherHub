@@ -99,6 +99,9 @@ input{
     padding-right: 50px;
     text-transform: capitalize;
 }
+.app-content .current-location-box span{
+    text-transform: uppercase;
+}
 .app-content{
     padding-top: 80px;
 }
@@ -123,6 +126,9 @@ input{
     margin-bottom: 10px;
     cursor: pointer;
     text-transform: capitalize;
+}
+.app-content .location-box span{
+    text-transform: uppercase;
 }
 .app-content .add-location{
     position: absolute;

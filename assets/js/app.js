@@ -56,7 +56,10 @@ jQuery(document).ready(function($){
         if(!$(this).hasClass('current')){
             $('.loading').css('display', 'block');
             $('.form-overlay').css('display', 'none');
-            getInfo($(this).html());
+            var find = $(this).html();
+            find = find.replace('<span>', '');
+            find = find.replace('</span>', '');
+            getInfo(find);
         }else{
             $('.loading').css('display', 'block');
             $('.form-overlay').css('display', 'none');
@@ -149,6 +152,24 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
     var request = $.get(url);
     location = location.toLowerCase();
 
+    // Wraps states in a span to capitalize them in CSS
+    states = location.split(' ');
+    var temp = '';
+    for(var i = 0; i < states.length; i++){
+        if(states[i].length == 2 || (states[i].length == 3 && states[i].substring(states[i].length-1) == ",")){
+            if(i + 1 < states.length){
+                temp += ('<span>' + states[i] + '</span> ');
+            }else{
+                temp += ('<span>' + states[i] + '</span>');
+            }
+        }else if(i + 1 < states.length){
+            temp += states[i] + ' ';
+        }else{
+            temp += states[i];
+        }
+        location = temp;
+    }
+
     // Successful location request
     request.done(function(data){
         var tomorrow = data.daily[1];
@@ -170,7 +191,10 @@ function getInfoLatLon(lat, lon, location, currentTemp, currentFeels, currentDes
                 if(!$(this).hasClass('current')){
                     $('.loading').css('display', 'block');
                     $('.form-overlay').css('display', 'none');
-                    getInfo($(this).html());
+                    var find = $(this).html();
+                    find = find.replace('<span>', '');
+                    find = find.replace('</span>', '');
+                    getInfo(find);
                 }else{
                     $('.loading').css('display', 'block');
                     $('.form-overlay').css('display', 'none');
