@@ -211,6 +211,7 @@ input{
 }
 .app-display{
     position: relative;
+    border: 15px solid white;
 }
 .app-display .left{
     width: 40%;
