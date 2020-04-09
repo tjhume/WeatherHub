@@ -251,7 +251,7 @@ input{
     max-width: 95%;
 }
 
-@media (max-width: 1400px){
+@media (max-width: 1450px){
     h1{
         font-size: 50px;
     }
@@ -279,6 +279,9 @@ input{
     .home-content #search,
     .home-content #submit-button{
         font-size: 20px;
+    }
+    .app-display{
+        border-width: 15px;
     }
 }
 
